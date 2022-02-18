@@ -1,7 +1,10 @@
 class GeneralTable:
     def __init__(self, filename: str) -> None:
-        self.table = self._create_table(filename)
-        self.header = self.table.pop(0)
+        self.identifier, self.name, self.header, self.table = self._create_table(filename)
+        # self.table = self._create_table(filename)
+        # self.identifier = self.table.pop(0)
+        # self.name = self.table.pop(0)
+        # self.header = self.table.pop(0)
         self.nrows = len(self.table)
         self.ncols = len(self.header)
         self.prop_dict = self._create_property_dict()
@@ -14,7 +17,7 @@ class GeneralTable:
         if kprop not in all_prop_keys:
             prop_key_string = ""
             for key in all_prop_keys:
-                prop_key_string += key
+                prop_key_string += key + ", "
             raise ValueError(f"Error: {kprop} is not a valid property. Valid properties are:\n {prop_key_string}")
         
         # iterate through table to find which two values "kval" sits in between and retrieve their indicies.
@@ -50,11 +53,24 @@ class GeneralTable:
         reqindex = self.prop_dict[reqprop]
         return interpolated_values[reqindex]
 
+
+    def print_props(self, kprop: str, kval: float, n_decimals: int=6) -> None:
+        interpolated_values = self.interpolate_props(kprop, kval)
+        print("------------------------------------------")
+        for val in range(len(interpolated_values)):
+            # output = f"{(self.header[val])}: {round(interpolated_values[val], n_decimals)}"
+            output = [self.header[val], round(interpolated_values[val], n_decimals)]
+            print("{: <10} {: <10}".format(*output))
+        print("------------------------------------------")
+
     
     def _create_table(self, filename: str):
         table = []
         with open(filename, 'r') as f:
             all_lines = f.readlines()
+            identifier = int(all_lines.pop(0).strip())
+            name = all_lines.pop(0).strip()
+            header = all_lines.pop(0).split()
             for line in all_lines:
                 table.append(line.split())
 
@@ -64,7 +80,7 @@ class GeneralTable:
                 if is_number:
                     table[row][col] = float(table[row][col])
 
-        return table
+        return identifier, name, header, table
 
 
     def _create_property_dict(self) -> dict:
