@@ -57,9 +57,12 @@ class GeneralTable:
     def print_props(self, kprop: str, kval: float, n_decimals: int=6) -> None:
         interpolated_values = self.interpolate_props(kprop, kval)
         print("------------------------------------------")
-        for val in range(len(interpolated_values)):
-            # output = f"{(self.header[val])}: {round(interpolated_values[val], n_decimals)}"
-            output = [self.header[val], round(interpolated_values[val], n_decimals)]
+        for prop in range(len(interpolated_values)):
+            output_prop = self.header[prop]
+            output_val = round(interpolated_values[prop], n_decimals)
+            output_val_str = f"{output_val:,}".replace(',', ' ')
+
+            output = [output_prop, output_val_str]
             print("{: <10} {: <10}".format(*output))
         print("------------------------------------------")
 
