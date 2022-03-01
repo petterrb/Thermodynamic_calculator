@@ -6,5 +6,7 @@ from interp.ui import InterpMenu
 def main() -> None:
     menu = InterpMenu()
     menu.menu()
+    # a test comment
+
 
 main()
