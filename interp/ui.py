@@ -6,7 +6,6 @@ class InterpMenu:
     def __init__(self) -> None:
         self.table_dict = self.__generate_tables()
 
-
     # Returns a list of all file names within the table folder.
     def __retrieve_files(self) -> list:
         root_dir = "tables"
@@ -32,7 +31,6 @@ class InterpMenu:
 
         return table_dict
 
-
     def __get_options(self) -> list:
         options = list()
         for identifier in sorted(self.table_dict):
@@ -43,22 +41,20 @@ class InterpMenu:
 
         return options
 
-
     def __print_options(self) -> None:
         print("Choose table you wish to retrieve data from:\n")
         options = self.__get_options()
         for opt in options:
-                print(opt)
+            print(opt)
 
         print()
-
 
     def __get_table(self, identifier: str) -> GeneralTable:
         try:
             table = self.table_dict[int(identifier)]
         except:
             raise ValueError(f"Error: no table in the database corresponds to the identifier: {identifier}")
-        
+
         return table
 
     def menu(self) -> None:
