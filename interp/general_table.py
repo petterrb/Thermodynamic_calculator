@@ -1,3 +1,8 @@
+def is_number(x: str) -> bool:
+    test_x = x.replace('.', '', 1)
+    test_x = test_x.replace('-', '', 1)
+    return test_x.isdigit()
+
 class GeneralTable:
     def __init__(self, filename: str) -> None:
         self.identifier, self.name, self.header, self.table = self._create_table(filename)
@@ -71,8 +76,7 @@ class GeneralTable:
 
         for row in range(len(table)):
             for col in range(len(table[row])):
-                is_number = table[row][col].replace('.', '', 1).isdigit()
-                if is_number:
+                if is_number(table[row][col]):
                     table[row][col] = float(table[row][col])
 
         return identifier, name, header, table

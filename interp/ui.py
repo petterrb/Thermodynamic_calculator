@@ -65,11 +65,12 @@ class InterpMenu:
             self.__print_options()
             try:
                 user_input = input()
-                table = self.__get_table(user_input)
-                print(f"You have chosen: {table.name}")
-                known_property = input("Known property: ")
-                known_value = float(input("Value: "))
-                table.print_props(known_property, known_value)
+                if user_input != "quit":
+                    table = self.__get_table(user_input)
+                    print(f"You have chosen: {table.name}")
+                    known_property = input("Known property: ")
+                    known_value = float(input("Value: "))
+                    table.print_props(known_property, known_value)
 
             except ValueError as error:
                 print(f"\n{error}\n")
