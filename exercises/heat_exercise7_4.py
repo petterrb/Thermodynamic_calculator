@@ -27,8 +27,6 @@ def vel_boundary_layer(x, fluid: Fluid):
 def thermal_boundary_layer(x, fluid: Fluid):
     return vel_boundary_layer(x, fluid) * PRANDTL_NUMBER[fluid]**(-1/3)
 
-
-
 def problem4() -> None:
     plt.rcParams.update({'font.size': 12})
 
