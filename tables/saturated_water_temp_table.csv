@@ -1,6 +1,8 @@
 2
 Properties of Saturated Water (Liquid-Vapor): Temperature Table
 temp press vf vg uf ug hf hfg hg sf sg
+C bar m3/kg m3/kg kJ/kg kJ/kg kJ/kg kJ/kg kJ/kg kJ/kgK kJ/kgK
+1 1 1e-3 1 1 1 1 1 1 1 1
 0.01 0.00611 1.0002 206.136 0.00 2375.3 0.01 2501.3 2501.4 0.0000 9.1562
 4 0.00813 1.0001 157.232 16.77 2380.9 16.78 2491.9 2508.7 0.0610 9.0514
 5 0.00872 1.0001 147.120 20.97 2382.3 20.98 2489.6 2510.6 0.0761 9.0257

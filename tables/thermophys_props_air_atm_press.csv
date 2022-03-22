@@ -1,6 +1,8 @@
 140
 Thermophysical Properties of Air at Atmospheric Pressure
 temp rho cp mu nu k a Pr
+K kg/m3 kJ/kgK Ns/m2 m2/s W/mK m2/s -
+1 1 1 1e-7 1e-6 1e-3 1e-6 1
 100 3.5562 1.032 71.1 2.00 9.34 2.54 0.786
 150 2.3364 1.012 103.4 4.426 13.8 5.84 0.758
 200 1.7458 1.007 132.5 7.590 18.1 10.3 0.737

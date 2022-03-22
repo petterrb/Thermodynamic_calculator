@@ -1,6 +1,8 @@
 141
 Thermophysical Properties of Water Vapor (Steam) at Atmospheric Pressure
 temp rho cp mu nu k a Pr
+K kg/m3 kJ/kgK Ns/m2 m2/s W/mK m2/s -
+1 1 1 1e-7 1e-6 1e-3 1e-6 1
 380 0.5863 2.060 127.1 21.68 24.6 20.4 1.06
 400 0.5542 2.014 134.4 24.25 26.1 23.4 1.04
 450 0.4902 1.980 152.5 31.11 29.9 30.8 1.01

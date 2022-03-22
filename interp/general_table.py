@@ -3,9 +3,10 @@ def is_number(x: str) -> bool:
     test_x = test_x.replace('-', '', 1)
     return test_x.isdigit()
 
+
 class GeneralTable:
     def __init__(self, filename: str) -> None:
-        self.identifier, self.name, self.header, self.table = self._create_table(filename)
+        self.identifier, self.name, self.header, self.units, self.factors, self.table = self._create_table(filename)
         self.n_rows = len(self.table)
         self.n_cols = len(self.header)
         self.prop_dict = self._create_property_dict()
@@ -43,6 +44,7 @@ class GeneralTable:
             other_val1 = prop_row1[col]
             other_val2 = prop_row2[col]
             interp_val = self.__interp_values(known_val, val1, val2, other_val1, other_val2)
+            interp_val *= self.factors[col]
             interpolated_values.append(interp_val)
 
         return interpolated_values
@@ -57,11 +59,18 @@ class GeneralTable:
         print("------------------------------------------")
         for prop in range(len(interpolated_values)):
             output_prop = self.header[prop]
-            output_val = round(interpolated_values[prop], n_decimals)
-            output_val_str = f"{output_val:,}".replace(',', ' ')
 
-            output = [output_prop, output_val_str]
-            print("{: <10} {: <10}".format(*output))
+            factor = self.factors[prop]
+            factor_str = " " if self.factors[prop] == 1 else f"{factor:.1e}"
+
+            output_val = interpolated_values[prop] / factor  # get back printed value
+            output_val = round(output_val, n_decimals)
+            output_val_str = f"{output_val:,}".replace(',', ' ')  # fix 1000 delimiter
+
+            unit = self.units[prop]
+
+            output = [output_prop, output_val_str, factor_str, unit]
+            print("{: <10} {: <10} {: <10} {: <10}".format(*output))
         print("------------------------------------------")
 
     def _create_table(self, filename: str):
@@ -71,6 +80,8 @@ class GeneralTable:
             identifier = int(all_lines.pop(0).strip())
             name = all_lines.pop(0).strip()
             header = all_lines.pop(0).split()
+            units = all_lines.pop(0).split()
+            factors = [float(f) for f in all_lines.pop(0).split()]
             for line in all_lines:
                 table.append(line.split())
 
@@ -79,7 +90,7 @@ class GeneralTable:
                 if is_number(table[row][col]):
                     table[row][col] = float(table[row][col])
 
-        return identifier, name, header, table
+        return identifier, name, header, units, factors, table
 
     def _create_property_dict(self) -> dict:
         prop_dict = {}

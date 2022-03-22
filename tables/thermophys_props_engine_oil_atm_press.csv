@@ -1,6 +1,8 @@
 151
 Thermophysical Properties of Engine Oil (Saturated Liquid)
 temp rho cp mu nu k a Pr beta
+K kg/m3 kJ/kgK Ns/m2 m2/s W/mK m2/s - 1/K
+1 1 1 1e-2 1e-6 1e-3 1e-7 1 1e-3
 273 899.1 1.796 385 4280 147 0.910 47000 0.70
 280 895.3 1.827 217 2430 144 0.880 27500 0.70
 290 890.0 1.868 99.9 1120 145 0.872 12900 0.70

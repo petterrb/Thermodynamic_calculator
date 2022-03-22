@@ -1,6 +1,8 @@
 23
 Ideal Gas Properties of Selected Gases
 temp h_CO2 u_CO2 s_CO2 h_CO u_CO s_CO h_H2O u_H2O s_H2O h_O2 u_O2 s_O2 h_N2 u_N2 s_N2
+K kJ/kmol kJ/kmol kJ/kmolK kJ/kmol kJ/kmol kJ/kmolK kJ/kmol kJ/kmol kJ/kmolK kJ/kmol kJ/kmol kJ/kmolK kJ/kmol kJ/kmol kJ/kmolK
+1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1
 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
 220 6601 4772 202.966 6391 4562 188.683 7295 5466 178.576 6404 4575 196.171 6391 4562 182.638 220
 230 6938 5026 204.464 6683 4771 189.980 7628 5715 180.054 6694 4782 197.461 6683 4770 183.938 230
