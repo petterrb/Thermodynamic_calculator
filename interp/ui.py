@@ -49,7 +49,7 @@ class InterpMenu:
 
         print()
 
-    def __get_table(self, identifier: str) -> GeneralTable:
+    def get_table(self, identifier: str) -> GeneralTable:
         try:
             table = self.table_dict[int(identifier)]
         except:
@@ -66,7 +66,7 @@ class InterpMenu:
             try:
                 user_input = input()
                 if user_input != "quit":
-                    table = self.__get_table(user_input)
+                    table = self.get_table(user_input)
                     print(f"You have chosen: {table.name}")
                     known_property = input("Known property: ")
                     known_value = float(input("Value: "))

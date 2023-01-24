@@ -14,12 +14,7 @@ class GeneralTable:
     # known_prop is the known property, and known_val is its corresponding value.
     def interpolate_props(self, known_prop: str, known_val: float) -> list:
         # exception handling - check if requested property exists in this table.
-        all_prop_keys = list(self.prop_dict.keys())
-        if known_prop not in all_prop_keys:
-            prop_key_string = ""
-            for key in all_prop_keys:
-                prop_key_string += key + ", "
-            raise ValueError(f"Error: {known_prop} is not a valid property. Valid properties are:\n {prop_key_string}")
+        self._check_if_valid(known_prop)
 
         # iterate through table to find which two values "known_val" sits in between and retrieve their indices.
         known_prop_index = self.prop_dict[known_prop]
@@ -43,11 +38,21 @@ class GeneralTable:
         for col in range(self.n_cols):
             other_val1 = prop_row1[col]
             other_val2 = prop_row2[col]
-            interp_val = self.__interp_values(known_val, val1, val2, other_val1, other_val2)
+            interp_val = self._interp_values(known_val, val1, val2, other_val1, other_val2)
             interp_val *= self.factors[col]
             interpolated_values.append(interp_val)
 
         return interpolated_values
+
+    def get_all_values(self, prop: str):
+        self._check_if_valid(prop)
+        values = list()
+        for _, row in enumerate(self.table):
+            col = self.prop_dict[prop]
+            values.append(row[col] * self.factors[col])
+
+        return values
+
 
     def interpolate_specific_prop(self, known_prop: str, known_val: float, requested_prop: str) -> float:
         interpolated_values = self.interpolate_props(known_prop, known_val)
@@ -98,6 +103,14 @@ class GeneralTable:
             prop_dict[self.header[col]] = col
 
         return prop_dict
+    
+    def _check_if_valid(self, prop):
+        all_prop_keys = list(self.prop_dict.keys())
+        if prop not in all_prop_keys:
+            prop_key_string = ""
+            for key in all_prop_keys:
+                prop_key_string += key + ", "
+            raise ValueError(f"Error: {prop} is not a valid property. Valid properties are:\n {prop_key_string}")
 
-    def __interp_values(self, x, x1, x2, y1, y2):
+    def _interp_values(self, x, x1, x2, y1, y2):
         return y1 + (x - x1) * (y2 - y1) / (x2 - x1)
